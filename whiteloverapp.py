@@ -91,33 +91,3 @@ r = pdk.Deck(
 st.title('Tokyo and Osaka Snow Depth Visualization')
 selected_city = st.empty()
 st.pydeck_chart(r)
-
-# クリックイベントの処理
-clicked = st.session_state.get('clicked', None)
-
-if clicked:
-    if clicked == 'Tokyo':
-        fig = px.line(tokyo_df, x='date', y='snow_depth', title='Tokyo Snow Depth')
-    else:
-        fig = px.line(osaka_df, x='date', y='snow_depth', title='Osaka Snow Depth')
-    st.plotly_chart(fig)
-
-# JavaScriptでクリックイベントをキャプチャ
-st.markdown("""
-<script>
-document.querySelectorAll('.deckgl-overlay').forEach(function(el) {
-    el.addEventListener('click', function(e) {
-        var name = e.target.innerText;
-        if (name.includes('Tokyo')) {
-            window.parent.postMessage({type: 'clicked', name: 'Tokyo'}, '*');
-        } else if (name.includes('Osaka')) {
-            window.parent.postMessage({type: 'clicked', name: 'Osaka'}, '*');
-        }
-    });
-});
-</script>
-""", unsafe_allow_html=True)
-
-# メッセージを受け取る
-st.session_state.clicked = st.experimental_get_query_params().get('clicked', [None])[0]
-
