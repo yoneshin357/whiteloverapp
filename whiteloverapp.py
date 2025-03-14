@@ -41,4 +41,83 @@ st.set_page_config(page_title="Snow Lover",
 st.write("""# ⛄ White Lover""")    
 st.write('## 表示設定')
 
+# データの準備
+tokyo_data = {
+    'date': ['2025-03-11', '2025-03-12', '2025-03-13'],
+    'snow_depth': [0, 0, 0]  # 仮のデータ
+}
+
+osaka_data = {
+    'date': ['2025-03-11', '2025-03-12', '2025-03-13'],
+    'snow_depth': [0, 0, 0]  # 仮のデータ
+}
+
+tokyo_df = pd.DataFrame(tokyo_data)
+osaka_df = pd.DataFrame(osaka_data)
+
+# 地図の設定
+view_state = pdk.ViewState(
+    latitude=35.6895,
+    longitude=139.6917,
+    zoom=5,
+    pitch=0
+)
+
+# 東京と大阪の位置
+locations = pd.DataFrame({
+    'name': ['Tokyo', 'Osaka'],
+    'lat': [35.6895, 34.6937],
+    'lon': [139.6917, 135.5023]
+})
+
+# Pydeckのレイヤー
+layer = pdk.Layer(
+    'ScatterplotLayer',
+    data=locations,
+    get_position='[lon, lat]',
+    get_radius=50000,
+    get_color='[200, 30, 0, 160]',
+    pickable=True
+)
+
+# Pydeckの地図
+r = pdk.Deck(
+    layers=[layer],
+    initial_view_state=view_state,
+    tooltip={"text": "{name}"}
+)
+
+# Streamlitのレイアウト
+st.title('Tokyo and Osaka Snow Depth Visualization')
+selected_city = st.empty()
+st.pydeck_chart(r)
+
+# クリックイベントの処理
+clicked = st.session_state.get('clicked', None)
+
+if clicked:
+    if clicked == 'Tokyo':
+        fig = px.line(tokyo_df, x='date', y='snow_depth', title='Tokyo Snow Depth')
+    else:
+        fig = px.line(osaka_df, x='date', y='snow_depth', title='Osaka Snow Depth')
+    st.plotly_chart(fig)
+
+# JavaScriptでクリックイベントをキャプチャ
+st.markdown("""
+<script>
+document.querySelectorAll('.deckgl-overlay').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+        var name = e.target.innerText;
+        if (name.includes('Tokyo')) {
+            window.parent.postMessage({type: 'clicked', name: 'Tokyo'}, '*');
+        } else if (name.includes('Osaka')) {
+            window.parent.postMessage({type: 'clicked', name: 'Osaka'}, '*');
+        }
+    });
+});
+</script>
+""", unsafe_allow_html=True)
+
+# メッセージを受け取る
+st.session_state.clicked = st.experimental_get_query_params().get('clicked', [None])[0]
 
