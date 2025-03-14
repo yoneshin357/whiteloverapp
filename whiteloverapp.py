@@ -55,6 +55,9 @@ osaka_data = {
 tokyo_df = pd.DataFrame(tokyo_data)
 osaka_df = pd.DataFrame(osaka_data)
 
+st.dataframe(tokyo_df)
+st.dataframe(osaka_df)
+
 # 地図の設定
 view_state = pdk.ViewState(
     latitude=35.6895,
