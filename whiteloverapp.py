@@ -39,7 +39,7 @@ st.set_page_config(page_title="Snow Lover",
 
 ###メインページ
 st.write("""# ⛄ White Lover""")    
-st.write('## 表示設定')
+
 
 # データの準備
 tokyo_data = {
