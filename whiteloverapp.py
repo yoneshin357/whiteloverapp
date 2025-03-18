@@ -80,14 +80,12 @@ place = event.selection["objects"]["map"][0]["name"]
 st.write(place)
 
 if place:
-    clicked_marker = info["object"]["name"]
-    # st.write(clicked_marker) #debug
     fig = None
-    if clicked_marker == "東京":
+    if place == "東京":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
         fig.update_layout(title="東京の気温推移")
 
-    elif clicked_marker == "横浜":
+    elif place == "横浜":
         fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
         fig.update_layout(title="横浜の気温推移")
     if fig:
