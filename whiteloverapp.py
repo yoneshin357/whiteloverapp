@@ -62,11 +62,12 @@ view_state = pdk.ViewState(
 layer = pdk.Layer(
     "ColumnLayer",
     [
-        {"position": [tokyo_lon, tokyo_lat], "name": "東京"},
-        {"position": [yokohama_lon, yokohama_lat], "name": "横浜"},
+        {"position": [tokyo_lon, tokyo_lat], "name": "東京", "elevation": tokyo_temp},
+        {"position": [yokohama_lon, yokohama_lat], "name": "横浜", "elevation": yokohama_temp},
     ],
     get_position="position",
-    get_color=[0, 0, 200],
+    get_elevation="elevation",
+    get_color=[100, 100, 230],
     get_radius=10000,
     pickable=True,
     id="map"
