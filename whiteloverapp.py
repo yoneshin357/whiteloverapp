@@ -79,9 +79,9 @@ layer = pdk.Layer(
     radius=5000
 )
 
-def on_select_callback(selection_data):
+def on_select_callback():
     st.write("選択されたデータ:", selection_data)
-    place = selection_data["objects"][0]["name"]
+    place = event.selection["objects"][0]["name"]
     st.write(place)
 
 
@@ -92,7 +92,7 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 col = st.columns(2)
 with col[0]:
-    event = st.pydeck_chart(deck, on_select="callback", selection_mode="single-object")
+    event = st.pydeck_chart(deck, on_select=on_select_callback, selection_mode="single-object")
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
@@ -103,7 +103,8 @@ if selection_location:
     place = selection_location
 
 try:
-    place = event.selection["objects"]["map"][0]["name"]
+    #place = event.selection["objects"]["map"][0]["name"]
+    st.write("ok")
 except:
     st.write("ok")
 
