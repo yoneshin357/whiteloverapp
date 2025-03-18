@@ -32,7 +32,7 @@ line['geometry'] = line['WKT'].apply(wkt.loads)
 line_gdf = gpd.GeoDataFrame(line, geometry='geometry')
 
 ###Streamlitの初期設定
-st.set_page_config(page_title="Snow Lover", 
+st.set_page_config(page_title="white Lover", 
                    layout="wide", page_icon="⛄",
                    initial_sidebar_state="expanded")
 
@@ -40,57 +40,62 @@ st.set_page_config(page_title="Snow Lover",
 ###メインページ
 st.write("""# ⛄ White Lover""")    
 
+# データ準備（東京と横浜の3日間の気温データ）
+tokyo_temp = [15, 17, 16]
+yokohama_temp = [14, 16, 15]
+dates = ['2023-10-26', '2023-10-27', '2023-10-28']
 
-# データの準備
-tokyo_data = {
-    'date': ['2025-03-11', '2025-03-12', '2025-03-13'],
-    'snow_depth': [0, 0, 0]  # 仮のデータ
-}
+# pydeckの初期設定
+tokyo_lat, tokyo_lon = 35.6895, 139.6917
+yokohama_lat, yokohama_lon = 35.4437, 139.6380
 
-osaka_data = {
-    'date': ['2025-03-11', '2025-03-12', '2025-03-13'],
-    'snow_depth': [0, 0, 0]  # 仮のデータ
-}
-
-tokyo_df = pd.DataFrame(tokyo_data)
-osaka_df = pd.DataFrame(osaka_data)
-
-st.dataframe(tokyo_df)
-st.dataframe(osaka_df)
-
-# 地図の設定
 view_state = pdk.ViewState(
-    latitude=35.6895,
-    longitude=139.6917,
-    zoom=5,
-    pitch=0
+    latitude=tokyo_lat,
+    longitude=tokyo_lon,
+    zoom=8,
+    pitch=0,
 )
 
-# 東京と大阪の位置
-locations = pd.DataFrame({
-    'name': ['Tokyo', 'Osaka'],
-    'lat': [35.6895, 34.6937],
-    'lon': [139.6917, 135.5023]
-})
-
-# Pydeckのレイヤー
 layer = pdk.Layer(
-    'ScatterplotLayer',
-    data=locations,
-    get_position='[lon, lat]',
-    get_radius=50000,
-    get_color='[200, 30, 0, 160]',
-    pickable=True
+    "ScatterplotLayer",
+    [
+        {"position": [tokyo_lon, tokyo_lat], "name": "東京"},
+        {"position": [yokohama_lon, yokohama_lat], "name": "横浜"},
+    ],
+    get_position="position",
+    get_color=[255, 0, 0],
+    get_radius=10000,
+    pickable=True,
 )
 
-# Pydeckの地図
-r = pdk.Deck(
+deck = pdk.Deck(
     layers=[layer],
     initial_view_state=view_state,
-    tooltip={"text": "{name}"}
+    map_style="mapbox://styles/mapbox/light-v9",
 )
 
-# Streamlitのレイアウト
-st.title('Tokyo and Osaka Snow Depth Visualization')
-selected_city = st.empty()
-st.pydeck_chart(r)
+# Streamlitアプリ
+st.pydeck_chart(deck)
+
+# クリックされたマーカーの処理
+info = st.session_state.get("info", None)
+if info:
+    clicked_marker = info["object"]["name"]
+
+    if clicked_marker == "東京":
+        fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
+        fig.update_layout(title="東京の気温推移")
+        st.plotly_chart(fig)
+
+    elif clicked_marker == "横浜":
+        fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
+        fig.update_layout(title="横浜の気温推移")
+        st.plotly_chart(fig)
+else:
+    st.write("地図上のマーカーをクリックしてください。")
+
+# pydeckのクリックイベントをStreamlitのセッションステートに保存
+def on_click(info):
+    st.session_state["info"] = info
+
+layer.on_click = on_click
