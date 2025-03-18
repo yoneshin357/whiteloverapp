@@ -83,7 +83,10 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 
 # Streamlitアプリ
-event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
+
+col = st.columns(2)
+with col[0]:
+    event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
 place = None
 try:
@@ -102,7 +105,8 @@ if place:
         fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
         fig.update_layout(title="横浜の気温推移")
     if fig:
-        st.plotly_chart(fig)
+        with col[1]:
+            st.plotly_chart(fig)
 else:
     st.write("地図上のマーカーをクリックしてください。")
 
