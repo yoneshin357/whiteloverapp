@@ -108,7 +108,8 @@ if place:
         with col[1]:
             st.plotly_chart(fig)
 else:
-    st.write("地図上のマーカーをクリックしてください。")
+    with col[1]:
+        st.write("地図上のマーカーをクリックしてください。")
 
 
 st.write(event.selection)
