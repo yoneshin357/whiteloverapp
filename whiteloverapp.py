@@ -66,7 +66,7 @@ layer = pdk.Layer(
         {"position": [yokohama_lon, yokohama_lat], "name": "横浜", "elevation": yokohama_temp},
     ],
     get_position="position",
-    get_elevation="elevation*100",
+    get_elevation="elevation[0]*100",
     get_color=[100, 100, 230],
     get_radius=10000,
     pickable=True,
