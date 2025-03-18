@@ -46,11 +46,11 @@ yokohama_temp = [14, 3, 10]
 dates = ['2023-10-26', '2023-10-27', '2023-10-28']
 
 # pydeckの初期設定
-tokyo_lat, tokyo_lon = 35.6895, 139.6917
-yokohama_lat, yokohama_lon = 35.4437, 139.6380
+tokyo_lat, tokyo_lon = 39.7186, 140.10232
+yokohama_lat, yokohama_lon = 37.9161, 139.03643
 
 selection_dates = st.selectbox('日付を選んでください', dates)
-selection_location = st.selectbox('観測値を選んでください', ['東京','横浜'])
+
 
 view_state = pdk.ViewState(
     latitude=tokyo_lat,
@@ -65,8 +65,8 @@ view_state = pdk.ViewState(
 layer = pdk.Layer(
     "ColumnLayer",
     [
-        {"position": [tokyo_lon, tokyo_lat], "name": "東京", "elevation": tokyo_temp},
-        {"position": [yokohama_lon, yokohama_lat], "name": "横浜", "elevation": yokohama_temp},
+        {"position": [tokyo_lon, tokyo_lat], "name": "秋田", "elevation": tokyo_temp},
+        {"position": [yokohama_lon, yokohama_lat], "name": "新潟", "elevation": yokohama_temp},
     ],
     get_position="position",
     get_elevation="elevation[0]*5000",
@@ -75,7 +75,8 @@ layer = pdk.Layer(
     pickable=True,
     id="map",
     extruded=True,
-    auto_highlight=True
+    auto_highlight=True,
+    radius=500
 )
 
         
@@ -88,11 +89,16 @@ col = st.columns(2)
 with col[0]:
     event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
+with col[1]:
+    selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
+
 place = None
 try:
     place = event.selection["objects"]["map"][0]["name"]
 except:
     st.write("ok")
+
+
 
 if place:
     st.write(place)
