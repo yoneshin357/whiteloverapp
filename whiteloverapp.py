@@ -56,7 +56,10 @@ view_state = pdk.ViewState(
     latitude=tokyo_lat,
     longitude=tokyo_lon,
     zoom=8,
-    pitch=0,
+    pitch=50,
+    use_container_width=False,
+    width="100%", 
+    height=1200
 )
 
 layer = pdk.Layer(
@@ -67,10 +70,12 @@ layer = pdk.Layer(
     ],
     get_position="position",
     get_elevation="elevation[0]*5000",
-    get_color=[100, 100, 230],
+    get_color=[100, 100, 230、１００],
     get_radius=10000,
     pickable=True,
-    id="map"
+    id="map"、
+    extruded=True,
+    auto_highlight=True
 )
 
         
