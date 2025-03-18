@@ -87,12 +87,13 @@ def on_select_callback(deck):
     #st.write(event.selection["objects"]["map"][0]["name"])
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
-if event.selection["objects"]["map"][0]["name"]:
-    place = event.selection["objects"]["map"][0]["name"]
+
 
 
 with col[0]:
     event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
+    if event.selection["objects"]["map"][0]["name"]:
+        place = event.selection["objects"]["map"][0]["name"]
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
