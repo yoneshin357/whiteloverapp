@@ -79,7 +79,12 @@ layer = pdk.Layer(
     radius=5000
 )
 
-        
+def on_select_callback(selection_data):
+    st.write("選択されたデータ:", selection_data)
+    place = selection_data["objects"][0]["name"]
+    st.write(place)
+
+
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
 
@@ -102,10 +107,7 @@ try:
 except:
     st.write("ok")
 
-def on_select_callback(selection_data):
-    st.write("選択されたデータ:", selection_data)
-    place = selection_data["objects"][0]["name"]
-    st.write(place)
+
 
 if place:
     st.write(place)
