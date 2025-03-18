@@ -87,7 +87,7 @@ def on_select_callback(deck):
     #st.write(event.selection["objects"]["map"][0]["name"])
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
-if event.selection["objects"]["map"][0]["name"]
+if event.selection["objects"]["map"][0]["name"]:
     place = event.selection["objects"]["map"][0]["name"]
 
 
