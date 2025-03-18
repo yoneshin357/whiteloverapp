@@ -6,7 +6,7 @@ import pydeck as pdk
 import plotly.express as px
 import geopandas as gpd
 from shapely import wkt
-
+import plotly.graph_objects as go
 
     
 ###ファイルパス設定（直下を参照する）
