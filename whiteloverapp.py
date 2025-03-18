@@ -80,17 +80,12 @@ layer = pdk.Layer(
 )
 col = st.columns(2)
 
+place = None
 def on_select_callback():
     place = event.selection["objects"]["map"][0]["name"]
     st.write(event)
     st.write(event.selection["objects"]["map"][0]["name"])
-
-
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
-
-
-# Streamlitアプリ
-
 
 with col[0]:
     event = st.pydeck_chart(deck, on_select=on_select_callback, selection_mode="single-object")
@@ -98,18 +93,11 @@ with col[0]:
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
 
-place = None
-
-if selection_location:
-    place = selection_location
-
 try:
     #place = event.selection["objects"]["map"][0]["name"]
     st.write("ok")
 except:
     st.write("ok")
-
-
 
 if place is not None:
     fig = None
