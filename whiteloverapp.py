@@ -76,7 +76,7 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 
 # Streamlitアプリ
-event = st.pydeck_chart(deck, on_select="rerun", selection_mode="multi-object")
+event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
 st.write(event.selection)
 
