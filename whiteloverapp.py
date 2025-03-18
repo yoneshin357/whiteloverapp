@@ -39,8 +39,7 @@ st.set_page_config(page_title="white Lover",
 
 ###メインページ
 st.write("""# ⛄ White Lover""")    
-if "info" not in st.session_state:
-    st.session_state.info = None
+
 # データ準備（東京と横浜の3日間の気温データ）
 tokyo_temp = [15, 17, 16]
 yokohama_temp = [14, 16, 15]
@@ -78,26 +77,31 @@ deck = pdk.Deck(
 # Streamlitアプリ
 st.pydeck_chart(deck)
 
+# st.session_state の初期化
+if "info" not in st.session_state:
+    st.session_state.info = None
+
 # クリックされたマーカーの処理
-info = st.session_state.get("info", None)
+info = st.session_state.info
 if info:
     clicked_marker = info["object"]["name"]
-
+    # st.write(clicked_marker) #debug
+    fig = None
     if clicked_marker == "東京":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
         fig.update_layout(title="東京の気温推移")
-        st.plotly_chart(fig)
 
     elif clicked_marker == "横浜":
         fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
         fig.update_layout(title="横浜の気温推移")
+    if fig:
         st.plotly_chart(fig)
 else:
     st.write("地図上のマーカーをクリックしてください。")
+# st.write(st.session_state.info) #debug
 
 # pydeckのクリックイベントをStreamlitのセッションステートに保存
 def on_click(info):
     st.session_state["info"] = info
 
 layer.on_click = on_click
-st.write(st.session_state.info)
