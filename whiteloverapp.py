@@ -70,7 +70,7 @@ layer = pdk.Layer(
     ],
     get_position="position",
     get_elevation="elevation[0]*5000",
-    get_color=[100, 100, 230、１００],
+    get_color=[100, 100, 230,100],
     get_radius=10000,
     pickable=True,
     id="map"、
