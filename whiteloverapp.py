@@ -49,6 +49,9 @@ dates = ['2023-10-26', '2023-10-27', '2023-10-28']
 tokyo_lat, tokyo_lon = 35.6895, 139.6917
 yokohama_lat, yokohama_lon = 35.4437, 139.6380
 
+selection_dates = st.selectbox('日付を選んでください', dates)
+selection_location = st.selectbox('観測値を選んでください', ['東京','横浜'])
+
 view_state = pdk.ViewState(
     latitude=tokyo_lat,
     longitude=tokyo_lon,
@@ -57,7 +60,7 @@ view_state = pdk.ViewState(
 )
 
 layer = pdk.Layer(
-    "ScatterplotLayer",
+    "ColumnLayer",
     [
         {"position": [tokyo_lon, tokyo_lat], "name": "東京"},
         {"position": [yokohama_lon, yokohama_lat], "name": "横浜"},
