@@ -66,14 +66,18 @@ layer = pdk.Layer(
     get_color=[255, 0, 0],
     get_radius=10000,
     pickable=True,
+    id="map"
 )
 
 deck = pdk.Deck(
     layers=[layer],
     initial_view_state=view_state,
     map_style="mapbox://styles/mapbox/light-v9",
+    selection_mode="single-object",
+    on_select="rerun"
 )
 
+st.write(deck["selection"]["objects"]["map"])
 # Streamlitアプリ
 st.pydeck_chart(deck)
 
