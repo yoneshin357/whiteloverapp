@@ -83,8 +83,8 @@ col = st.columns(2)
 place = None
 def on_select_callback():
     place = event.selection["objects"]["map"][0]["name"]
-    st.write(event)
-    st.write(event.selection["objects"]["map"][0]["name"])
+    #st.write(event)
+    #st.write(event.selection["objects"]["map"][0]["name"])
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
 with col[0]:
