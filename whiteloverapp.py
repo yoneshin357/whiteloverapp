@@ -99,18 +99,18 @@ try:
 except:
     st.write("ok")
 
-if place is not None:
-    fig = None
-    if place == "秋田":
-        fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
-        fig.update_layout(title="秋田の気温推移")
 
-    elif place == "新潟":
-        fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
-        fig.update_layout(title="新潟の気温推移")
-    if fig:
-        with col[1]:
-            st.plotly_chart(fig)
+fig = None
+if place == "秋田":
+    fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
+    fig.update_layout(title="秋田の気温推移")
+
+elif place == "新潟":
+    fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
+    fig.update_layout(title="新潟の気温推移")
+if fig:
+    with col[1]:
+        st.plotly_chart(fig)
 else:
     with col[1]:
         st.write("地図上のマーカーをクリックしてください。")
