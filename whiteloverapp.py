@@ -42,7 +42,7 @@ st.write("""# ⛄ White Lover""")
 
 # データ準備（東京と横浜の3日間の気温データ）
 tokyo_temp = [15, 17, 16]
-yokohama_temp = [14, 16, 15]
+yokohama_temp = [14, 3, 10]
 dates = ['2023-10-26', '2023-10-27', '2023-10-28']
 
 # pydeckの初期設定
@@ -63,7 +63,7 @@ layer = pdk.Layer(
         {"position": [yokohama_lon, yokohama_lat], "name": "横浜"},
     ],
     get_position="position",
-    get_color=[255, 0, 0],
+    get_color=[0, 0, 200],
     get_radius=10000,
     pickable=True,
     id="map"
@@ -76,10 +76,12 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 # Streamlitアプリ
 event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
-place = event.selection["objects"]["map"][0]["name"]
-st.write(place)
+try:
+    place = event.selection["objects"]["map"][0]["name"]
+except:
 
 if place:
+    st.write(place)
     fig = None
     if place == "東京":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
