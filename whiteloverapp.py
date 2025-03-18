@@ -77,9 +77,11 @@ deck = pdk.Deck(
     on_select="rerun"
 )
 
-st.write(deck["selection"]["objects"]["map"])
+
 # Streamlitアプリ
 st.pydeck_chart(deck)
+
+st.write(deck["selection"]["objects"]["map"])
 
 # st.session_state の初期化
 if "info" not in st.session_state:
