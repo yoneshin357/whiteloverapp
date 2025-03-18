@@ -76,9 +76,9 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 
 # Streamlitアプリ
-st.pydeck_chart(deck, selection_mode="single-object", on_select="callback")
+event = st.pydeck_chart(deck, selection_mode="single-object")
 
-st.write(deck["selection"]["objects"]["map"])
+st.write(event.selection)
 
 # st.session_state の初期化
 if "info" not in st.session_state:
