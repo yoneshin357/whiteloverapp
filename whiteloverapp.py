@@ -78,7 +78,8 @@ event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
 try:
     place = event.selection["objects"]["map"][0]["name"]
-
+except:
+    st.write("ok")
 
 if place:
     st.write(place)
