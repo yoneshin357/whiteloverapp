@@ -87,7 +87,7 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 col = st.columns(2)
 with col[0]:
-    event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
+    event = st.pydeck_chart(deck, on_select=on_select_callback, selection_mode="single-object")
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
@@ -96,23 +96,27 @@ place = None
 
 if selection_location:
     place = selection_location
+
 try:
     place = event.selection["objects"]["map"][0]["name"]
 except:
     st.write("ok")
 
-
+def on_select_callback(selection_data):
+    st.write("選択されたデータ:", selection_data)
+    place = selection_data["objects"][0]["name"]
+    st.write(place)
 
 if place:
     st.write(place)
     fig = None
     if place == "秋田":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
-        fig.update_layout(title="東京の気温推移")
+        fig.update_layout(title="秋田の気温推移")
 
     elif place == "新潟":
         fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
-        fig.update_layout(title="横浜の気温推移")
+        fig.update_layout(title="新潟の気温推移")
     if fig:
         with col[1]:
             st.plotly_chart(fig)
