@@ -81,7 +81,7 @@ layer = pdk.Layer(
 col = st.columns(2)
 
 def on_select_callback():
-    #place = event.selection["objects"]["map"][0]["name"]
+    place = event.selection["objects"]["map"][0]["name"]
     st.write(event)
     st.write(event.selection["objects"]["map"][0]["name"])
 
@@ -111,7 +111,7 @@ except:
 
 
 
-if place:
+if place is not None:
     fig = None
     if place == "秋田":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
