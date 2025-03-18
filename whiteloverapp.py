@@ -92,12 +92,7 @@ with col[0]:
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
-
-try:
-    #place = event.selection["objects"]["map"][0]["name"]
-    st.write("ok")
-except:
-    st.write("ok")
+    place = selection_location
 
 
 fig = None
