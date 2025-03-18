@@ -70,7 +70,7 @@ layer = pdk.Layer(
     ],
     get_position="position",
     get_elevation="elevation[0]*5000",
-    get_color=[100, 100, 230,100],
+    get_color=[230, 230, 230,100],
     
     pickable=True,
     id="map",
@@ -93,6 +93,9 @@ with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
 
 place = None
+
+if selection_location:
+    place = selection_location
 try:
     place = event.selection["objects"]["map"][0]["name"]
 except:
@@ -103,11 +106,11 @@ except:
 if place:
     st.write(place)
     fig = None
-    if place == "東京":
+    if place == "秋田":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
         fig.update_layout(title="東京の気温推移")
 
-    elif place == "横浜":
+    elif place == "新潟":
         fig = go.Figure(data=go.Scatter(x=dates, y=yokohama_temp))
         fig.update_layout(title="横浜の気温推移")
     if fig:
