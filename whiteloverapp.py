@@ -69,13 +69,7 @@ layer = pdk.Layer(
     id="map"
 )
 
-deck = pdk.Deck(
-    layers=[layer],
-    initial_view_state=view_state,
-    map_style="mapbox://styles/mapbox/light-v9",
-    selection_mode="single-object",
-    on_select="rerun"
-)
+deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9",selection_mode="single-object", on_select="rerun")
 
 
 # Streamlitアプリ
