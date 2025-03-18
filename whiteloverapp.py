@@ -112,7 +112,6 @@ except:
 
 
 if place:
-    st.write(place)
     fig = None
     if place == "秋田":
         fig = go.Figure(data=go.Scatter(x=dates, y=tokyo_temp))
@@ -128,5 +127,3 @@ else:
     with col[1]:
         st.write("地図上のマーカーをクリックしてください。")
 
-
-st.write(event.selection)
