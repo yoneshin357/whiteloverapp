@@ -39,7 +39,8 @@ st.set_page_config(page_title="white Lover",
 
 ###メインページ
 st.write("""# ⛄ White Lover""")    
-
+if "info" not in st.session_state:
+    st.session_state.info = None
 # データ準備（東京と横浜の3日間の気温データ）
 tokyo_temp = [15, 17, 16]
 yokohama_temp = [14, 16, 15]
