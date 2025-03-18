@@ -92,7 +92,7 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 col = st.columns(2)
 with col[0]:
-    event = st.pydeck_chart(deck, on_select=on_select_callback, selection_mode="single-object")
+    event = st.pydeck_chart(deck, on_select="callback", selection_mode="single-object")
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
