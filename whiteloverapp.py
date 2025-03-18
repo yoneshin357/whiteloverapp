@@ -80,8 +80,8 @@ layer = pdk.Layer(
 )
 
 def on_select_callback():
-    place = event.selection["objects"]["map"][0]["name"]
-    st.write(place)
+    #place = event.selection["objects"]["map"][0]["name"]
+    st.write(event.selection)
 
 
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
