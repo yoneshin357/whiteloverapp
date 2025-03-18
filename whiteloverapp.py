@@ -68,12 +68,15 @@ layer = pdk.Layer(
     pickable=True,
     id="map"
 )
-
+def on_select_callback(selected_objects):
+    if selected_objects:
+        st.write(f"選択されたオブジェクト: {selected_objects}")
+        
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
 
 # Streamlitアプリ
-st.pydeck_chart(deck)
+st.pydeck_chart(deck, selection_mode="single-object", on_select="callback")
 
 st.write(deck["selection"]["objects"]["map"])
 
