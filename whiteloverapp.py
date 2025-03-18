@@ -99,3 +99,4 @@ def on_click(info):
     st.session_state["info"] = info
 
 layer.on_click = on_click
+st.write(st.session_state.info)
