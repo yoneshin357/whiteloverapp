@@ -80,7 +80,6 @@ layer = pdk.Layer(
 )
 
 def on_select_callback():
-    st.write("選択されたデータ:", selection_data)
     place = event.selection["objects"][0]["name"]
     st.write(place)
 
