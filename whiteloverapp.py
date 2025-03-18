@@ -78,6 +78,7 @@ layer = pdk.Layer(
     auto_highlight=True,
     radius=5000
 )
+col = st.columns(2)
 
 def on_select_callback():
     #place = event.selection["objects"]["map"][0]["name"]
@@ -89,7 +90,7 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 
 # Streamlitアプリ
 
-col = st.columns(2)
+
 with col[0]:
     event = st.pydeck_chart(deck, on_select=on_select_callback, selection_mode="single-object")
 
