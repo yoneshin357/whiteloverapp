@@ -68,9 +68,7 @@ layer = pdk.Layer(
     pickable=True,
     id="map"
 )
-def on_select_callback(selected_objects):
-    if selected_objects:
-        st.write(f"選択されたオブジェクト: {selected_objects}")
+
         
 deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox://styles/mapbox/light-v9")
 
@@ -78,15 +76,10 @@ deck = pdk.Deck(layers=[layer],initial_view_state=view_state, map_style="mapbox:
 # Streamlitアプリ
 event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object")
 
-st.write(event.selection)
+place = event.selection["objects"]["map"][0]["name"]
+st.write(place)
 
-# st.session_state の初期化
-if "info" not in st.session_state:
-    st.session_state.info = None
-
-# クリックされたマーカーの処理
-info = st.session_state.info
-if info:
+if place:
     clicked_marker = info["object"]["name"]
     # st.write(clicked_marker) #debug
     fig = None
@@ -101,10 +94,6 @@ if info:
         st.plotly_chart(fig)
 else:
     st.write("地図上のマーカーをクリックしてください。")
-# st.write(st.session_state.info) #debug
 
-# pydeckのクリックイベントをStreamlitのセッションステートに保存
-def on_click(info):
-    st.session_state["info"] = info
 
-layer.on_click = on_click
+st.write(event.selection)
