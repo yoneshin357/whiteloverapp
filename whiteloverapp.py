@@ -96,7 +96,7 @@ with col[0]:
 
 with col[1]:
     selection_location = st.selectbox('観測値を選んでください', ['秋田','新潟'])
-    if selection_location
+    if selection_location:
         place = selection_location
 
 
