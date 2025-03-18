@@ -73,7 +73,7 @@ layer = pdk.Layer(
     get_color=[100, 100, 230,100],
     get_radius=10000,
     pickable=True,
-    id="map"、
+    id="map",
     extruded=True,
     auto_highlight=True
 )
