@@ -80,7 +80,7 @@ layer = pdk.Layer(
 )
 col = st.columns(2)
 
-place = None
+
 def on_select_callback():
     place = event.selection["objects"]["map"][0]["name"]
     #st.write(event)
