@@ -43,14 +43,14 @@ st.write("""# ⛄🧊 White Lover""")
 
 
 st.write(os.getcwd())
-st.write(os.getcwd()+"/*")
+st.write(glob.glob(os.getcwd()+"/*"))
 
 def save_hello_txt():
     file_path = os.getcwd()+"/out.txt"
     with open(file_path, 'w') as f:
         f.write('hello')
-    if st.button('保存'):
-        save_hello_txt()
+if st.button('保存'):
+    save_hello_txt()
 
 
 
