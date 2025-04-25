@@ -14,10 +14,13 @@ def login_screen():
     st.subheader("Please log in.")
     st.button("Log in with Google", on_click=st.login)
 
-if not st.experimental_user.is_logged_in:
+if "user_token" in st.session_state:
+    st.success("ログイン済みです！")
     login_screen()
 else:
-    st.experimental_user
+    st.warning("ログインしていません。認証を設定してください。")
+    login_screen()
+
 ###ファイルパス設定（直下を参照する）
 path= ''
 
