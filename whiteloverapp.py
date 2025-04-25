@@ -10,11 +10,13 @@ import plotly.graph_objects as go
 import os, glob
 
 if not st.experimental_user.is_logged_in:
-    if st.button("Login with Auth0"):
-        st.login("auth0")
-else:
-    st.write(f"Hello, {st.experimental_user.name}!")
-    st.button("Log out", on_click=st.logout)
+    if st.button("Log in with Google"):
+        st.login()
+    st.stop()
+
+if st.button("Log out"):
+    st.logout()
+st.markdown(f"Welcome! {st.experimental_user.name}")
         
 ###ファイルパス設定（直下を参照する）
 path= ''
