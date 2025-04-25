@@ -9,9 +9,10 @@ from shapely import wkt
 import plotly.graph_objects as go
 import os, glob
 
-if st.button("Log in with Google"):
-    st.login()
-    
+def login_screen():
+    st.header("This app is private.")
+    st.subheader("Please log in.")
+    st.button("Log in with Google", on_click=st.login)
 ###ファイルパス設定（直下を参照する）
 path= ''
 
