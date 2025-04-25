@@ -9,7 +9,15 @@ from shapely import wkt
 import plotly.graph_objects as go
 import os, glob
 
-    
+if not st.experimental_user.is_logged_in:
+    if st.button("Log in with Google"):
+        st.login()
+        st.stop()  # 認証処理のため停止
+else:
+    st.write(f"こんにちは、{st.experimental_user.name}さん！")
+    if st.button("ログアウト"):
+        st.logout()
+        
 ###ファイルパス設定（直下を参照する）
 path= ''
 
