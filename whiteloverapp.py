@@ -39,6 +39,20 @@ st.set_page_config(page_title="white Lover",
 
 ###メインページ
 st.write("""# ⛄🧊 White Lover""")    
+
+
+st.write(os.getcwd())
+st.write(os.getcwd()+"/*")
+
+def save_hello_txt():
+file_path = os.getcwd()+"/out.txt"
+with open(file_path, 'w') as f:
+  f.write('hello')
+if st.button('保存'):
+save_hello_txt()
+
+
+
 place = None
 # データ準備（東京と横浜の3日間の気温データ）
 tokyo_temp = [15, 17, 16]
