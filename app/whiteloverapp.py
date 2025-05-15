@@ -66,9 +66,9 @@ if uploaded_file is not None:
 
     file_metadata = {"name": file_name}
     uploaded = drive_service.files().create(
-        body=file_metadata,
-        media_body=media,
-        fields="id"
+      body=file_metadata,
+      media_body=media,
+      fields="id"
     ).execute()
 
     st.success(f"ファイルをアップロードしました！File ID: {uploaded.get('id')}")
