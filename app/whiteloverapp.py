@@ -70,7 +70,7 @@ items = results.get("files", [])
 
 if items:
     file_id = items[0]["id"]
-    request = drive_service.files().get_media(fileId=file_id)
+    request = drive_service.files().get_media(fileId=file_id)
     fh = io.BytesIO()
     downloader = MediaIoBaseDownload(fh, request)
 
