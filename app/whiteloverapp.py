@@ -9,12 +9,15 @@ from shapely import wkt
 import plotly.graph_objects as go
 import pandas as pd
 import os
+import glob
 
 
 
 ###ファイルパス設定（直下を参照する）
 path= ''
 
+st.write(os.getcwd())
+st.write(glob.glob(os.getcwd()+"/*"))
 ###CSV読込み
 ##座標データ
 kilo = pd.read_csv(path+"kirotei_lonlat.csv", encoding="shift_jis")
@@ -75,8 +78,7 @@ if uploaded_file is not None:
 
 
 
-st.write(os.getcwd())
-st.write(glob.glob(os.getcwd()+"/*"))
+
 
 def save_hello_txt():
     file_path = os.getcwd()+"/out.txt"
