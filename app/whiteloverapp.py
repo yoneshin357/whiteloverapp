@@ -23,11 +23,11 @@ st.write(path+"kirotei_lonlat.csv")
 ##座標データ
 #kilo = pd.read_csv(path+"kirotei_lonlat.csv", encoding="shift_jis")
 ##駅データ
-sta = pd.read_csv(path+"station_lonlat_jre.csv", encoding="shift_jis")
+#sta = pd.read_csv(path+"station_lonlat_jre.csv", encoding="shift_jis")
 ##路線データ
-line = pd.read_csv(path+"tsushosen_line.csv", encoding="shift_jis")
+#line = pd.read_csv(path+"tsushosen_line.csv", encoding="shift_jis")
 ##サンプルデータ
-data_raw = pd.read_csv(path+"sample_snow.csv", encoding="shift_jis")
+#data_raw = pd.read_csv(path+"sample_snow.csv", encoding="shift_jis")
 
 ###データ下処理
 ##駅データ
