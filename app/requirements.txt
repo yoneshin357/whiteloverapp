@@ -3,3 +3,4 @@ streamlit_pills
 plotly==5.15.0
 geopandas
 shapely
+google-api-python-client
