@@ -76,7 +76,7 @@ if items:
 
     done = False
     while not done:
-    status, done = downloader.next_chunk()
+        status, done = downloader.next_chunk()
 
     fh.seek(0)
     df = pd.read_csv(fh,encoding='cp932')
