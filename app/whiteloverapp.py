@@ -14,7 +14,7 @@ import glob
 
 
 ###ファイルパス設定（直下を参照する）
-path= '/'
+path= ''
 
 st.write(os.getcwd())
 st.write(glob.glob(os.getcwd()+"/*"))
