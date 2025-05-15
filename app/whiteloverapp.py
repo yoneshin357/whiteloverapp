@@ -69,21 +69,21 @@ results = drive_service.files().list(q=query, fields="files(id, name)").execute(
 items = results.get("files", [])
 
 if items:
-    file_id = items[0]["id"]
-    request = drive_service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
+    file_id = items[0]["id"]
+    request = drive_service.files().get_media(fileId=file_id)
+    fh = io.BytesIO()
+    downloader = MediaIoBaseDownload(fh, request)
 
-    done = False
-    while not done:
-        status, done = downloader.next_chunk()
+    done = False
+    while not done:
+    status, done = downloader.next_chunk()
 
-    fh.seek(0)
-    df = pd.read_csv(fh,encoding='cp932')
-    st.write("📄 sample.csv の内容:")
-    st.dataframe(df)
+    fh.seek(0)
+    df = pd.read_csv(fh,encoding='cp932')
+    st.write("📄 sample.csv の内容:")
+    st.dataframe(df)
 else:
-    st.warning("sample.csv が見つかりませんでした。")
+    st.warning("sample.csv が見つかりませんでした。")
 
 
 
