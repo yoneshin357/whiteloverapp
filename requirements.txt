@@ -7,3 +7,4 @@ geopandas
 shapely
 google
 googleapiclient
+google.oauth2
