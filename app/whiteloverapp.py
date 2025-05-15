@@ -83,15 +83,17 @@ if items:
     df = pd.read_csv(fh,encoding='cp932')
     st.write("📄 sample.csv の内容:")
     edited_df = st.data_editor(df)
+
+    if st.button("csv保存"):
+        csv_data = edited_df.to_csv(index=False).encode("cp932")
+        media = MediaIoBaseUpload(io.BytesIO(csv_data), mimetype="text/csv")
+        drive_service.files().update(fileId=file_id, media_body=media).execute()
+        st.success("保存しました！")
 else:
     st.warning("sample.csv が見つかりませんでした。")
 
 
-if st.button("csv保存"):
-    csv_data = edited_df.to_csv(index=False).encode("cp932")
-    media = MediaIoBaseUpload(io.BytesIO(csv_data), mimetype="text/csv")
-    drive_service.files().update(fileId=file_id, media_body=media).execute()
-    st.success("保存しました！")
+
 
 
 
@@ -99,7 +101,7 @@ def save_hello_txt():
     file_path = os.getcwd()+"/out.txt"
     with open(file_path, 'w') as f:
         f.write('hello')
-if st.button('保存'):
+if st.button('Hello'):
     save_hello_txt()
 
 
