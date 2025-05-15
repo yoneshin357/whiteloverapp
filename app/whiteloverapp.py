@@ -62,7 +62,7 @@ if uploaded_file is not None:
 
     st.success(f"ファイルをアップロードしました！File ID: {uploaded.get('id')}")
 
-
+folder_id = "1B9zvcUnbuKrpFRLbXt2bOVgjKnIL1Tf7
 # sample.csv を検索
 query = f"'{folder_id}' in parents and name = 'location_obs.csv' and mimeType = 'text/csv'"
 results = drive_service.files().list(q=query, fields="files(id, name)").execute()
