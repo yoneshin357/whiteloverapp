@@ -21,7 +21,7 @@ st.write(glob.glob(os.getcwd()+"/*"))
 st.write(path+"kirotei_lonlat.csv")
 ###CSV読込み
 ##座標データ
-kilo = pd.read_csv(path+"kirotei_lonlat.csv", encoding="shift_jis")
+#kilo = pd.read_csv(path+"kirotei_lonlat.csv", encoding="shift_jis")
 ##駅データ
 sta = pd.read_csv(path+"station_lonlat_jre.csv", encoding="shift_jis")
 ##路線データ
