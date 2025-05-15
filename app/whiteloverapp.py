@@ -47,28 +47,32 @@ st.write("""# ⛄🧊 White Lover""")
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-# 認証情報を読み込む
-creds = service_account.Credentials.from_service_account_file(
-          'app/credentials/your_key.json',  # JSON形式のキーファイルへのパス
-          scopes=['https://www.googleapis.com/auth/drive']
-        )
-# Google Drive APIクライアントを作成
-drive_service = build('drive', 'v3', credentials=creds)
-# アップロードするファイルの情報
-file_name = 'example.csv'
-file_metadata = {
-  'name': file_name,
-  'parents': ['1B9zvcUnbuKrpFRLbXt2bOVgjKnIL1Tf7'],  # ファイルID(ドライブURIの’folders/’に続く値)
-}
-# ファイルをアップロード
-media = MediaFileUpload(file_name, mimetype='application/csv')
-file = drive_service.files().create(
-          body=file_metadata,
-          media_body=media,
-          fields='id',
-          supportsAllDrives=True  # ポイント！
-        ).execute()
-print(f'File ID: {file.get("id")}')
+
+
+
+creds = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=["https://www.googleapis.com/auth/drive.file"]
+)
+drive_service = build("drive", "v3", credentials=creds)
+
+# ファイルアップロード
+uploaded_file = st.file_uploader("ファイルをアップロードしてください", type=["csv", "txt", "xlsx"])
+
+if uploaded_file is not None:
+    file_name = uploaded_file.name
+    file_data = uploaded_file.read()
+    media = MediaIoBaseUpload(io.BytesIO(file_data), mimetype="application/octet-stream")
+
+    file_metadata = {"name": file_name}
+    uploaded = drive_service.files().create(
+        body=file_metadata,
+        media_body=media,
+        fields="id"
+    ).execute()
+
+    st.success(f"ファイルをアップロードしました！File ID: {uploaded.get('id')}")
+
 
 
 st.write(os.getcwd())
