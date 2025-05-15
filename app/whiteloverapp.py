@@ -12,7 +12,7 @@ import pandas as pd
 
 
 ###ファイルパス設定（直下を参照する）
-path= 'app/'
+path= ''
 
 ###CSV読込み
 ##座標データ
@@ -49,7 +49,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 # 認証情報を読み込む
 creds = service_account.Credentials.from_service_account_file(
-          'credentials/your_key.json',  # JSON形式のキーファイルへのパス
+          'app/credentials/your_key.json',  # JSON形式のキーファイルへのパス
           scopes=['https://www.googleapis.com/auth/drive']
         )
 # Google Drive APIクライアントを作成
