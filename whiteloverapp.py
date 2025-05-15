@@ -9,17 +9,7 @@ from shapely import wkt
 import plotly.graph_objects as go
 import os, glob
 
-def login_screen():
-    st.header("This app is private.")
-    st.subheader("Please log in.")
-    st.button("Log in with Google", on_click=st.login)
 
-if "user_token" in st.session_state:
-    st.success("ログイン済みです！")
-    login_screen()
-else:
-    st.warning("ログインしていません。認証を設定してください。")
-    login_screen()
 
 ###ファイルパス設定（直下を参照する）
 path= ''
