@@ -67,7 +67,7 @@ folder_id = "1B9zvcUnbuKrpFRLbXt2bOVgjKnIL1Tf7"
 query = f"'{folder_id}' in parents and name = 'location_obs.csv' and mimeType = 'text/csv'"
 results = drive_service.files().list(q=query, fields="files(id, name)").execute()
 items = results.get("files", [])
-
+st.write(items)
 if items:
     file_id = items[0]["id"]
     request = drive_service.files().get_media(fileId=file_id)
