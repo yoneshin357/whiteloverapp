@@ -42,7 +42,7 @@ st.write(st.secrets["private_gsheets_url"])
 
 creds = service_account.Credentials.from_service_account_info(
   st.secrets["gcp_service_account"],
-  scopes=["https://www.googleapis.com/auth/drive.file"]
+  scopes=["https://www.googleapis.com/auth/drive"]
 )
 drive_service = build("drive", "v3", credentials=creds)
 
