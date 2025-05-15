@@ -85,10 +85,10 @@ if items:
     edited_df = st.data_editor(df)
 
     if st.button("csv保存"):
-        csv_data = edited_df.to_csv(index=False).encode("cp932")
-        media = MediaIoBaseUpload(io.BytesIO(csv_data), mimetype="text/csv")
-        drive_service.files().update(fileId=file_id, media_body=media).execute()
-        st.success("保存しました！")
+        csv_data = edited_df.to_csv(index=False).encode("cp932")
+        media = MediaIoBaseUpload(io.BytesIO(csv_data), mimetype="text/csv")
+        drive_service.files().update(fileId=file_id, media_body=media).execute()
+        st.success("保存しました！")
 else:
     st.warning("sample.csv が見つかりませんでした。")
 
