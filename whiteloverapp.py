@@ -42,6 +42,9 @@ st.set_page_config(page_title="white Lover",
 ###メインページ
 st.write("""# ⛄🧊 White Lover""")    
 
+from streamlit_google_oauth import google_oauth2_required
+
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
