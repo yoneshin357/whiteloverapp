@@ -18,6 +18,7 @@ path= '/'
 
 st.write(os.getcwd())
 st.write(glob.glob(os.getcwd()+"/*"))
+st.write(path+"kirotei_lonlat.csv")
 ###CSV読込み
 ##座標データ
 kilo = pd.read_csv(path+"kirotei_lonlat.csv", encoding="shift_jis")
