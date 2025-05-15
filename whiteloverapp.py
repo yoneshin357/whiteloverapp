@@ -52,6 +52,32 @@ st.set_page_config(page_title="white Lover",
 ###メインページ
 st.write("""# ⛄🧊 White Lover""")    
 
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+# 認証情報を読み込む
+creds = service_account.Credentials.from_service_account_file(
+          'service_account.json',  # JSON形式のキーファイルへのパス
+          scopes=['https://www.googleapis.com/auth/drive']
+        )
+# Google Drive APIクライアントを作成
+drive_service = build('drive', 'v3', credentials=creds)
+# アップロードするファイルの情報
+file_name = 'example.csv'
+file_metadata = {
+  'name': file_name,
+  'parents': ['1B9zvcUnbuKrpFRLbXt2bOVgjKnIL1Tf7'],  # ファイルID(ドライブURIの’folders/’に続く値)
+}
+# ファイルをアップロード
+media = MediaFileUpload(file_name, mimetype='application/csv')
+file = drive_service.files().create(
+          body=file_metadata,
+          media_body=media,
+          fields='id',
+          supportsAllDrives=True  # ポイント！
+        ).execute()
+print(f'File ID: {file.get("id")}')
+
 
 st.write(os.getcwd())
 st.write(glob.glob(os.getcwd()+"/*"))
