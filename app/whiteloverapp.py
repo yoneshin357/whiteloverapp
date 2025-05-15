@@ -10,15 +10,12 @@ import plotly.graph_objects as go
 import pandas as pd
 import os
 import glob
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 
 
 
-###ファイルパス設定（直下を参照する）
-path= ''
-
-st.write(os.getcwd())
-st.write(glob.glob(os.getcwd()+"/*"))
-st.write(path+"kirotei_lonlat.csv")
 
 
 ###Streamlitの初期設定
@@ -30,11 +27,14 @@ st.set_page_config(page_title="white Lover",
 ###メインページ
 st.write("""# ⛄🧊 White Lover""")    
 
+###ファイルパス設定（直下を参照する）
+path= ''
+
+st.write(os.getcwd())
+st.write(glob.glob(os.getcwd()+"/*"))
+st.write(path+"kirotei_lonlat.csv")
 
 
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
 
 st.write(st.secrets["private_gsheets_url"])
 
