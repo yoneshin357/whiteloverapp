@@ -60,18 +60,18 @@ drive_service = build("drive", "v3", credentials=creds)
 uploaded_file = st.file_uploader("ファイルをアップロードしてください", type=["csv", "txt", "xlsx"])
 
 if uploaded_file is not None:
-    file_name = uploaded_file.name
-    file_data = uploaded_file.read()
-    media = MediaIoBaseUpload(io.BytesIO(file_data), mimetype="application/octet-stream")
+    file_name = uploaded_file.name
+    file_data = uploaded_file.read()
+    media = MediaIoBaseUpload(io.BytesIO(file_data), mimetype="application/octet-stream")
 
-    file_metadata = {"name": file_name}
-    uploaded = drive_service.files().create(
+    file_metadata = {"name": file_name}
+    uploaded = drive_service.files().create(
         body=file_metadata,
         media_body=media,
         fields="id"
     ).execute()
 
-    st.success(f"ファイルをアップロードしました！File ID: {uploaded.get('id')}")
+    st.success(f"ファイルをアップロードしました！File ID: {uploaded.get('id')}")
 
 
 
