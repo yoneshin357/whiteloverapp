@@ -54,7 +54,7 @@ if uploaded_file is not None:
     file_data = uploaded_file.read()
     media = MediaIoBaseUpload(io.BytesIO(file_data), mimetype="application/octet-stream")
 
-    file_metadata = {"name": file_name}
+    file_metadata = {"name": file_name,"parents": ["1B9zvcUnbuKrpFRLbXt2bOVgjKnIL1Tf7"]}
     uploaded = drive_service.files().create(
       body=file_metadata,
       media_body=media,
