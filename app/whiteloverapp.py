@@ -48,8 +48,8 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
+st.write(st.secrets["private_gsheets_url"])
 
-private_gsheets_url
 creds = service_account.Credentials.from_service_account_info(
   st.secrets["gcp_service_account"],
   scopes=["https://www.googleapis.com/auth/drive.file"]
