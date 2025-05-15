@@ -51,8 +51,8 @@ from googleapiclient.http import MediaFileUpload
 
 
 creds = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=["https://www.googleapis.com/auth/drive.file"]
+  st.secrets["gcp_service_account"],
+  scopes=["https://www.googleapis.com/auth/drive.file"]
 )
 drive_service = build("drive", "v3", credentials=creds)
 
