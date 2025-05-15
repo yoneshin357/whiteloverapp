@@ -82,10 +82,16 @@ if items:
     fh.seek(0)
     df = pd.read_csv(fh,encoding='cp932')
     st.write("📄 sample.csv の内容:")
-    st.dataframe(df)
+    edited_df = st.data_editor(df)
 else:
     st.warning("sample.csv が見つかりませんでした。")
 
+
+if st.button("csv保存"):
+    csv_data = edited_df.to_csv(index=False).encode("cp932")
+    media = MediaIoBaseUpload(io.BytesIO(csv_data), mimetype="text/csv")
+    drive_service.files().update(fileId=file_id, media_body=media).execute()
+    st.success("保存しました！")
 
 
 
